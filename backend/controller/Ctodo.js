@@ -6,7 +6,7 @@ exports.getTodos = async (req, res) => {
         res.json(Todos);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({ message: "Internal Server Error" });
     }
 }
 
@@ -50,18 +50,19 @@ exports.patchTodos = async (req, res) => {
     try {
         const { id } = req.params;
         const { done } = req.body;
+
+        const updatedTodo = await Todo.update(
+            { done },
+            { where: { id } }
+        );
         const Todos = await Todo.findOne({
             where: {
                 id,
             }
         });
-        const updatedTodo = await Todo.update(
-            { done },
-            { where: { id } }
-        );
 
         if (Todos) {
-            res.json(updatedTodo);
+            res.json(Todos);
         } else {
             res.json({ "message": "Todo not found" });
         }
@@ -80,7 +81,7 @@ exports.deleteTodos = async (req, res) => {
         console.log(isDeleted);
 
         if (isDeleted) {
-            return res.send(true);
+            return res.send({ "message": "Todo deleted successfully", "deletedId": id });
         } else {
             res.json({ "message": "Todo not found" });
         }

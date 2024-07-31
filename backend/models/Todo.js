@@ -1,5 +1,5 @@
 const TodoModel = (sequelize, DataTypes) => {
-    const Todo = sequelize.define('Todo', {
+    const Todo = sequelize.define('todo', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
