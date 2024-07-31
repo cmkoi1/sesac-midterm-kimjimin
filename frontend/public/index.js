@@ -25,10 +25,73 @@ async function getTodos() {
             todoList.appendChild(div);
 
 
-            deleteButton.addEventListener('click', () =>{
+            deleteButton.addEventListener('click', () => {
                 div.parentNode.removeChild(div)
-             })
+            })
+
+            todo.addEventListener('change', () => {
+                if (todo.checked) {
+                    div.style.textDecoration = 'line-through'
+                    div.style.color = "red"
+                } else {
+                    div.style.textDecoration = ''
+                    div.style.color = ''
+                }
+
+            })
+
+
+
         }
+        const form = document.getElementById('form');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const todoInput = document.getElementById('add');
+
+            console.log(todoInput.value); // 입력된 값
+
+            const newTodo = todoInput.value.trim(); // 양쪽 공백 제거
+
+            if (newTodo !== "") {
+                const div = document.createElement('div');
+                const span = document.createElement('span');
+                const todo = document.createElement("input");
+                const deleteButton = document.createElement('button');
+
+                todo.type = 'checkbox'
+
+
+                span.innerText = newTodo;
+                deleteButton.textContent = 'X'
+
+                div.appendChild(todo);
+                div.appendChild(span);
+                div.appendChild(deleteButton);
+                todoList.appendChild(div);
+
+
+                deleteButton.addEventListener('click', () => {
+                    div.parentNode.removeChild(div)
+                })
+
+                todo.addEventListener('change', () => {
+                    if (todo.checked) {
+                        div.style.textDecoration = 'line-through'
+                        div.style.color = "red"
+                    } else {
+                        div.style.textDecoration = ''
+                        div.style.color = ''
+                    }
+
+                })
+
+            }
+
+            // // input 창 초기화
+            todoInput.value = '';
+        })
     } catch (error) {
         console.error('Error: ', error)
     }
@@ -38,9 +101,12 @@ window.addEventListener("DOMContentLoaded", (event) => {
     getTodos();
 });
 
-function addTodo() {
 
-}
+
+// function addTodo() {
+//     let add = document.getElementById('add').value;
+//     console.log('test');
+// }
 
 function deleteTodo() {
 
