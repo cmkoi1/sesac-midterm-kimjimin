@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "express": "^4.19.2",
+    "http": "^0.0.1-security",
+    "mysql2": "^3.11.0",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2"
+  }
+}
